@@ -6,25 +6,22 @@
 </head>
 <body>
 <div id="box">
-<a href="https://ixunuo.github.io/zhuan/?tid=7108869&page=1">test</a>
+    <a href="https://ixunuo.github.io/zhuan/?tid=7108869&page=1">test</a>
 </div>
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 <script>
     window.onload = function(){
         var app = new Vue({
             el:'#box',
-            data:{
-                msg:'Hello World!',
-            },
-            methods:{
-                    function(){
-                        this.$http.jsonp("http://106.15.121.35:8989/zhuan?tid=7108869&page=1").then(result => {
-                            console.log(result.body);
-                            var test = window.location.href;
-                            alert(test);
-                        });
-                }
+            data:{},
+            methods:{},
+            created:function(){
+                var test = window.location.search;
+                var url =  "http://106.15.121.35:8989/zhuan"+test
+                this.$http.jsonp(url).then(result => {
+                    console.log(result.body);
+                });
             }
         });
     }
