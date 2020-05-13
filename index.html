@@ -8,9 +8,22 @@
 <div id="box">
     
 </div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
 <script>
 var test = window.location.search;
-alert(test);
+var url =  "http://106.15.121.35:8989/zhuan"+test
+var vm = new Vue({
+    el: " #box ",
+    data: {},
+    methods: {
+        jsonpClick() {
+            this.$http.jsonp(url).then(result => {
+                console.log(result.body);
+            });
+        }
+    }
+});
 </script>
 </body>
 </html>
