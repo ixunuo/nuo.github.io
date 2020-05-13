@@ -6,10 +6,14 @@
 </head>
 <body>
 <div id="box">
-    <input type="button" value="jsonp请求" @click="jsonpClick">
+    
 </div>
 <script>
-var test = window.location.href;
+    var test = window.location.href;
+    tid = test.split('/')[-2]
+    page = test.split('/')[-1]
+    alert(tid)
+    alert(page)
 alert(test);
 </script>
 </body>
