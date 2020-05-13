@@ -2,20 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>赚吧小助手</title>
+    <title>Vue跨域</title>
 </head>
 <body>
 <div id="box">
-    
+<a href="https://ixunuo.github.io/zhuan/?tid=7108869&page=1">test</a>
 </div>
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
 <script>
-var test = window.location.search;
-var url =  "http://106.15.121.35:8989/zhuan"+test
-this.$http.jsonp("http://127.0.0.1:8888/zhuan?tid=7108869&page=1").then(result => {
-console.log(result.body);
-});
+    window.onload = function(){
+        var app = new Vue({
+            el:'#box',
+            data:{
+                msg:'Hello World!',
+            },
+            methods:{
+                    function(){
+                        this.$http.jsonp("http://106.15.121.35:8989/zhuan?tid=7108869&page=1").then(result => {
+                            console.log(result.body);
+                            var test = window.location.href;
+                            alert(test);
+                        });
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
