@@ -13,12 +13,9 @@
 <script>
 var test = window.location.search;
 var url =  "http://106.15.121.35:8989/zhuan"+test
-jsonpClick() {
-            this.$http.jsonp("http://127.0.0.1:8888/zhuan?tid=7108869&page=1").then(result => {
-                console.log(result.body);
-                var test = window.location.href;
-                alert(test);
-            });
+this.$http.jsonp("http://127.0.0.1:8888/zhuan?tid=7108869&page=1").then(result => {
+console.log(result.body);
+});
 </script>
 </body>
 </html>
