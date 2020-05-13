@@ -1,1 +1,36 @@
-<p>404</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue跨域</title>
+</head>
+<body>
+<div id="box">
+    <input type="button" value="jsonp请求" @click="jsonpClick">
+</div>
+
+<script type="text/javascript">
+    function jsonphandle(data){
+        alert("age:" + data.age + "name:" + data.name);
+    }
+</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
+<script>
+    function print() {
+        console(a)
+        console(a)
+    }
+    var vm = new Vue({
+        el: " #box ",
+        data: {},
+        methods: {
+            jsonpClick() {
+                  var test = window.location.href;
+                  alert(test);
+            }
+        }
+    });
+</script>
+</body>
+</html>
