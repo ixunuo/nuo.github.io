@@ -18,7 +18,7 @@
             methods:{},
             created:function(){
                 var test = window.location.search;
-                var url =  "http://106.15.121.35:8989/zhuan"+test
+                var url =  "//106.15.121.35:8989/zhuan"+test
                 this.$http.jsonp(url).then(result => {
                     console.log(result.body);
                 });
