@@ -4,27 +4,20 @@
     <meta charset="UTF-8">
     <title>Vue跨域</title>
 </head>
-<body>
-<div id="box">
-    <a href="https://ixunuo.github.io/zhuan/?tid=7108869&page=1">test</a>
-</div>
-<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
-<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
-<script>
-    window.onload = function(){
-        var app = new Vue({
-            el:'#box',
-            data:{},
-            methods:{},
-            created:function(){
-                var test = window.location.search;
-                var url =  "http://106.15.121.35:8989/zhuan"+test
-                this.$http.jsonp(url).then(result => {
-                    console.log(result.body);
-                });
-            }
-        });
+<style>
+    body {
+        /*opacity:0;*/
+        margin: 0;
+        transition: 0.2s
     }
-</script>
+    .main{
+        border: medium none;
+        display: block; /* iframes are inline by default */
+        height: 50vh; /* Viewport-relative units */
+        width: 50vw;
+    }
+</style>
+<body>
+<iframe id="iframe" src="http://106.15.121.35:8989/zhuan?tid=7108869&page=1" class="main"></iframe>
 </body>
 </html>
