@@ -1,23 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Vue跨域</title>
+    <meta charset="UTF-8"  name="viewport" content="initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <title>速览</title>
 </head>
+<body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ixunuo/zhuan/style.css">
 <style>
-    body {
-        /*opacity:0;*/
-        margin: 0;
-        transition: 0.2s
-    }
-    .main{
-        border: medium none;
-        display: block; /* iframes are inline by default */
-        height: 50vh; /* Viewport-relative units */
-        width: 50vw;
+    [v-cloak]{
+        display: none;
     }
 </style>
-<body>
-<iframe id="iframe" src="http://106.15.121.35:8989/zhuan?tid=7108869&page=1" class="main"></iframe>
+<div id="app" v-cloak>
+    <div class="error" v-if="iserror" v-cloak>
+        <h1>⚠️_(:з」∠)_链接打不开了</h1>
+        <h3>最大可能是权限不够或者原贴已被删除，如果是我服务器挂掉了请速速联系我</h3>
+        <h3><a style="text-decoration: none;" :href="'http://www.zuanke8.com//forum.php?mod=viewthread&tid='+tid+'&mobile=2'">点我查看原文试试？</a></h3>
+        <h3>或者原文链接：{{'http://www.zuanke8.com//forum.php?mod=viewthread&tid='+tid+'&mobile=2'}}</h3>
+    </div>
+    <div class="subject"  v-if="page" v-cloak>
+        <span>{{'[权'+page.readperm+']'}}</span>{{page.subject}}
+        <button @click="showimg">
+            <span v-if="!isshowimg">🔐</span>
+            <span v-if="isshowimg">🔑</span>
+        </button>
+    </div>
+    <div v-for="floor in page" v-if="floor.message || floor.images || floor.comments || floor.rate" class="floor"  v-if="page" v-cloak>
+        <div class="message">
+            <div v-if="floor.message">
+                <label v-if="floor.authorid === page.authorid" style="background: dodgerblue;color: white">楼主：</label>
+                <pre>{{floor.message}}</pre>
+            </div>
+        </div>
+        <div v-if="floor.images" v-show="isshowimg" class="img" v-cloak>
+            <img v-for="image in floor.images" :src="image">
+        </div>
+
+        <div v-if="floor.comments" class="comments" v-cloak>
+            <pre v-for="comment in floor.comments" class="comment">{{comment}}</pre>
+        </div>
+
+
+        <div v-if="floor.rate" class="rate" v-cloak>评分人数：{{floor.rate}}</div>
+    </div>
+    <div class="indicator"  v-if="page" v-cloak>
+        <ul>
+            <li><a style="text-decoration: none;" :href="'http://www.zuanke8.com//forum.php?mod=viewthread&tid='+tid+'&mobile=2'">原文</a></li>
+            <li v-for="i in parseInt(page.totalpage)" @click="topage(i)" class="indicator" :class="{nowpage:i==nowpage}">{{i}}</li>
+            <li @click="topage(parseInt(nowpage)+1)">下一页</li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ixunuo/zhuan/main.js"></script>
 </body>
 </html>
