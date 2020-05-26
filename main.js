@@ -51,7 +51,7 @@ var app = new Vue({
     },
     watch:{
         nowpage:function(newVal){
-            var url = "https://xunuo.tk:8939/zhuan?tid="+this.tid+'&page='+newVal
+            var url = "http://106.15.121.35:8936/zhuan?tid="+this.tid+'&page='+newVal
             this.$http.jsonp(url).then(result => {
                 this.page = result.body;
                 this.needShow()
