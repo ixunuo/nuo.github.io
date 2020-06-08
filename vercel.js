@@ -51,7 +51,7 @@ var app = new Vue({
     },
     watch:{
         nowpage:function(newVal){
-            var url = "https://wap.ikkw.cn/?tid="+this.tid+'&page='+newVal
+            var url = "https://wap.ikkw.cn/api?tid="+this.tid+'&page='+newVal
             this.$http.jsonp(url).then(result => {
                 this.page = result.body;
                 this.needShow()
