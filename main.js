@@ -51,7 +51,7 @@ var app = new Vue({
     },
     watch:{
         nowpage:function(newVal){
-            var url = "https://service-66ch0735-1300545711.sh.apigw.tencentcs.com/release/zhuanPage?tid="+this.tid+'&page='+newVal
+            var url = "https://service-ehdebvif-1300545711.sh.apigw.tencentcs.com/release/zhuanPage?tid="+this.tid+'&page='+newVal
             this.$http.jsonp(url).then(result => {
                 this.page = result.body;
                 this.needShow()
