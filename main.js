@@ -4,7 +4,7 @@ var app = new Vue({
         page:undefined,
         tid:undefined,
         nowpage:'1',
-        isshowimg:false,
+        isshowimg:true,
         iserror:false,
         isloading:true,
         loadingCss:''
