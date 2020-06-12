@@ -1,22 +1,13 @@
-function GetQueryString(name) {
-var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
-var context = "";
-if (r != null)
-context = r[2];
-reg = null;
-r = null;
-return context == null || context == "" || context == "undefined" ? "" : context;
-}
-
 var app = new Vue({
     el:'#app',
     data:{
         page:undefined,
         tid:undefined,
-        nowpage:undefined,
+        nowpage:'1',
         isshowimg:false,
-        iserror:false
+        iserror:false,
+        isloading:true,
+        loadingCss:''
     },
     methods:{
         showimg:function () {
@@ -45,18 +36,35 @@ var app = new Vue({
     },
     created(){
         this.tid = GetQueryString('tid')
-        this.nowpage = GetQueryString('page')
-        this.nowpage =1
-
+        this.nowpage = GetQueryString('page')||'1'
+        // this.nowpage =1
+        if(Data){
+            this.isloading = false
+            this.page = Data
+            document.querySelector('#loading').style.display='none'
+            // el.style.display='none'
+        }
+        else{
+            this.iserror = true
+            this.isloading = false
+            this.loadingCss = ''
+            document.querySelector('#loading').style.display='none'
+        }
     },
     watch:{
         nowpage:function(newVal){
-            var url = "https://service-ehdebvif-1300545711.sh.apigw.tencentcs.com/release/zhuanPage?tid="+this.tid+'&page='+newVal
+            this.loadingCss = {filter: 'blur(20px)'}
+            document.querySelector('#loading').style.display='block'
+            var url = "https://zhuan-vercel.now.sh/api?tid="+this.tid+'&page='+newVal
             this.$http.jsonp(url).then(result => {
                 this.page = result.body;
                 this.needShow()
+                this.loadingCss = ''
+                document.querySelector('#loading').style.display='none'
             },result=>{
                 this.iserror = true
+                this.loadingCss = ''
+                document.querySelector('#loading').style.display='none'
             });
         },
         isshowimg:function () {
