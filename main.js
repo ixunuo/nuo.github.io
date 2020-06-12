@@ -55,7 +55,7 @@ var app = new Vue({
         nowpage:function(newVal){
             this.loadingCss = {filter: 'blur(20px)'}
             document.querySelector('#loading').style.display='block'
-            var url = "https://zhuan-vercel.now.sh/api?tid="+this.tid+'&page='+newVal
+            var url = "http://xunuo.tk:8936/zhuan/jsonpData?tid="+this.tid+'&page='+newVal
             this.$http.jsonp(url).then(result => {
                 this.page = result.body;
                 this.needShow()
